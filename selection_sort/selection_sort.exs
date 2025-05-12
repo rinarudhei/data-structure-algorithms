@@ -1,6 +1,8 @@
 defmodule SelectionSort do
   @doc """
     Receive a list, sort the list with SelectionSort algorithm in ascending order.
+    Select the minimum value in the list, put it at front of the list.
+    Exclude the element from the list, repeat selection.
     Return {:ok, result} when success.
     Return {:error, :not_a_list} when input is not a list
     Return {: error, :not_integer} when input element is not integer.
@@ -16,18 +18,24 @@ defmodule SelectionSort do
     {:ok, do_sort(arr)}
   end
 
-  defp do_sort(arr, sorted \\ [])
-  defp do_sort([], sorted), do: sorted
+  defp do_sort([]), do: []
 
-  defp do_sort(arr, sorted) do
-    [min_value | rest] = get_min_value(arr)
-    do_sort(rest, [min_value | sorted])
+  defp do_sort([head | _] = arr) do
+    {min_index, min_value} = select_min(arr, 0, 0, head) 
+    rest = List.delete_at(arr, min_index)
+    [min_value | do_sort(rest)]
   end
 
-  defp get_min_value(arr) do
-    min_value = Enum.max(arr)
-    rest = List.delete(arr, min_value)
-    [min_value | rest]
+  defp select_min([], _, min_index, min_value) do
+    {min_index, min_value}
+  end
+
+  defp select_min([head | tail], current_index, min_index, min_value) do
+    if head < min_value do
+      select_min(tail, current_index + 1, current_index, head)
+    else
+      select_min(tail, current_index + 1, min_index, min_value)
+    end
   end
 end
 
