@@ -1,4 +1,10 @@
 defmodule Fibonacci do
+  @doc """
+    Calculate n-th fibonacci number with memoization.
+    Return {:ok, result} when success, 
+    return {:error, :not_an_integer} if input is not an integer,
+    return {:error, :not_positive_input} if input is less than 1.
+  """
   def fib(n) when not is_integer(n), do: {:error, :not_an_integer}
   def fib(n) when n <= 0, do: {:error, :not_positive_input}
 

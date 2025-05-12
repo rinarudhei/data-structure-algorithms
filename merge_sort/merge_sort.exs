@@ -2,7 +2,7 @@ defmodule MergeSort do
   @doc """
     Receive a list and return a sorted list. 
     Divide the list into left and right,
-    then merge softed left and right list.
+    then merge sorted left and right list.
   """
   @spec sort(list()) :: list()
   def sort([_head] = arr), do: arr
