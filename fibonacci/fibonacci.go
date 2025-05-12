@@ -1,5 +1,6 @@
 package fibonacci
 
+// Calculate n-th fibonacci number with memoization.
 func Fib(n int) int {
 	if n <= 0 {
 		return -1
