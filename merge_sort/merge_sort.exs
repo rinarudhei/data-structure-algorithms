@@ -24,12 +24,10 @@ defmodule MergeSort do
   end
 
   defp merge([l_head | l_tail], [r_head | r_tail], acc) do
-    cond do
-      l_head <= r_head ->
-        merge(l_tail, [r_head | r_tail], [l_head | acc])
-
-      true ->
-        merge([l_head | l_tail], r_tail, [r_head | acc])
+    if l_head <= r_head do
+      merge(l_tail, [r_head | r_tail], [l_head | acc])
+    else
+      merge([l_head | l_tail], r_tail, [r_head | acc])
     end
   end
 end

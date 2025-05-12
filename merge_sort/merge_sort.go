@@ -1,5 +1,11 @@
 package merge_sort
 
+
+// Sort input slice with MergeSortAlgorithm.
+// Divide slice into two, left and right slices.
+// Merge left and right (sorted) slices by comparing and reordering each index in both slices.
+// Merged slices should be a sorted slice.
+// Do it in recursion
 func MergeSort(arr []int) []int {
 	totalLength := len(arr)
 	if totalLength <= 1 {
