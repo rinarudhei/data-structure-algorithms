@@ -9,33 +9,24 @@ defmodule QuickSort do
   Return {:error, :not_integer}
   """
 
-  @spec sort(list(integer())) :: {:ok, list(integer())} | {:error, :not_list} | {:error, :not_integer}
+  @spec sort(list(integer())) ::
+          {:ok, list(integer())} | {:error, :not_list} | {:error, :not_integer}
   def sort([]), do: {:ok, []}
   def sort(arr) when not is_list(arr), do: {:error, :not_list}
-  def sort([head | tail]) when not is_number(head), do: {:error, :not_integer}
+  def sort([head | _]) when not is_number(head), do: {:error, :not_integer}
 
   def sort(arr) do
-    {:ok, do_sort(arr)}
+    {:ok, do_sort(arr, [])}
   end
 
-  defp do_sort([]), do: []
-  defp do_sort([_] = arr), do: arr
+  defp do_sort([], acc), do: acc
 
-  defp do_sort([head | tail]) do
-    {left, right} = partition(head, tail, [], [])
-    do_sort(left) ++ [head | do_sort(right)]
-  end
-
-  defp partition(_, [], left_arr, right_arr) do
-    {Enum.reverse(left_arr), Enum.reverse(right_arr)}
-  end
-
-  defp partition(pivot, [head | tail], left_arr, right_arr) do
-    if head <= pivot do
-      partition(pivot, tail, [head | left_arr], right_arr)
-    else
-      partition(pivot, tail, left_arr, [head | right_arr])
-    end
+  defp do_sort(arr, acc) do
+    pivot = Enum.random(arr)
+    rest = List.delete(arr, pivot)
+    {left, right} = rest |> Enum.split_with(&(&1 <= pivot))
+    acc1 = do_sort(right, acc)
+    do_sort(left, [pivot | acc1])
   end
 end
 
