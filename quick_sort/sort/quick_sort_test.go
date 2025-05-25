@@ -1,8 +1,12 @@
-package main
+package quick_sort_test
 
-import "testing"
+import (
+	quick_sort "quick_sort/sort"
+	"testing"
+)
 
 func TestQuickShort(t *testing.T) {
+
 	tests := []struct {
 		name     string
 		input    []int
@@ -47,7 +51,7 @@ func TestQuickShort(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result := QuickSort(tt.input)
+			result := quick_sort.QuickSort(tt.input)
 
 			for i, el := range result {
 				if el != tt.expected[i] {

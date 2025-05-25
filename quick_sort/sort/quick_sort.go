@@ -1,10 +1,6 @@
-package main
+package quick_sort
 
-// Choose pivot element
-// Arrange lower number to the left of the pivot
-// Arrange higher number to the right of the pivot
 func QuickSort(in []int) []int {
-
 	return doSortMemOptimized(in, 0, len(in))
 }
 
